@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<!-- Form情報の定義 -->
+	<form-beans>
+		<!-- HelloWorldFormという名前（キー）でaction.form.HelloWorldFormクラスを利用する -->
+		<form-bean name="MainForm" type="action.form.MainForm" />
+		<form-bean name="HelloWorldForm" type="action.form.HelloWorldForm" />
+		<form-bean name="TestAForm" type="action.form.TestAForm" />
+		<form-bean name="BeanInFormForm" type="action.form.BeanInFormForm" />
+		
+	</form-beans>
+
+	<!-- アクションの定義 -->
+	<action-mappings>
+		<action name="MainForm" type="action.MainAction" 
+			path="/MainAction" parameter="action" scope="request">
+			<!-- アクションの遷移先として論理名をhello ファイルパスを/view/HelloWorld.jspとする -->
+			<forward name="movingFormTest" path="/view/HelloWorld.jsp" />
+			<forward name="hello" path="/view/HelloWorld.jsp" />
+			<forward name="hello" path="/view/HelloWorld.jsp" />
+			<forward name="list" path="/view/list.jsp" />
+		</action>
+
+		<!-- Form情報をHelloWorldFormとして、action.HelloWorldActionクラスをアクションとして指定する -->
+		<!-- Form情報はリクエストスコープに格納される -->
+		<action name="HelloWorldForm" type="action.HelloWorldAction"
+			path="/HelloWorld" scope="request">
+			<!-- アクションの遷移先として論理名をhello ファイルパスを/view/HelloWorld.jspとする -->
+			<forward name="hello" path="/view/HelloWorld.jsp" />
+			<forward name="list" path="/view/list.jsp" />
+		</action>
+
+		<action path="/board" name="TestAForm" 
+			type="action.TestAAction" parameter="cmd" scope="request" validate="false">
+			<forward name="check1" path="/list.jsp" />
+			<forward name="check2" path="/read.jsp" />
+		</action>
+	</action-mappings>
+
+	<message-resources parameter="ApplicationResource" />
+</struts-config>
